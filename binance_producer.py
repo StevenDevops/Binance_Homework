@@ -223,6 +223,6 @@ if __name__ == "__main__":
     client.get_total_notional_value(q1)
     # Question 4
     client.get_price_spread(q2)
-    # Question 5
+    # Question 5,6
     start_http_server(8080)
     client.get_absolute_delta(q2)
