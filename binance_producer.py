@@ -59,13 +59,13 @@ class BinanceProducer:
         df = df.sort_values(by=[type], ascending=False).head(top)
 
         # Print the results
-        print("\n Top Symbols for %s by %s \n" %  (quoteAsset, type))
+        print("\n Top %s Symbols for %s by %s \n" %  (top, quoteAsset, type))
         print(df.to_string(index = False))
 
         # Return value for question 3
         return df['symbol'].values.tolist()
 
-    def get_total_notional_value(self,symbols):
+    def get_total_notional_value(self,top,symbols):
         '''
         https://binance-docs.github.io/apidocs/spot/en/#order-book
         I use this formula
@@ -86,7 +86,7 @@ class BinanceProducer:
         notional_list = {}
         for symbol in symbols:
             notional_list[symbol] = {}
-            r = self.spot_client.depth(symbol,limit=200)
+            r = self.spot_client.depth(symbol,limit=top)
             df = pd.DataFrame.from_dict(r, orient="index")
 
             for column in ["asks","bids"]:
@@ -101,7 +101,7 @@ class BinanceProducer:
                 })
 
         # Print the results
-        print("\n The total notional value of the top 200 bids and asks currently on each order book for %s \n" %  symbols)
+        print("\n The total notional value of the top %s bids and asks currently on each order book for %s \n" %  (top, symbols))
         print (json.dumps(notional_list, indent=2))
 
     def get_price_spread(self,symbols,output=True):
@@ -152,6 +152,7 @@ class BinanceProducer:
                 print (json.dumps(price_spread_list, indent=2))
 
         return price_spread_list
+
     def get_absolute_delta(self, symbols):
         '''
         I used this formula:
@@ -220,7 +221,7 @@ if __name__ == "__main__":
     q1 = client.get_top_symbols_by_quote_asset(5,'BTC','volume')
     q2 = client.get_top_symbols_by_quote_asset(5,'USDT','count')
     # Question 3
-    client.get_total_notional_value(q1)
+    client.get_total_notional_value(200,q1)
     # Question 4
     client.get_price_spread(q2)
     # Question 5,6
