@@ -153,6 +153,42 @@ class BinanceProducer:
 
         return price_spread_list
     def get_absolute_delta(self, symbols):
+        '''
+        I used this formula:
+            abs(old_spread - new_spread)
+
+        The output will be like:
+        {
+          "BTCUSDT": {
+            "absolute_delta_askPrice": 0.5800000000017462,
+            "absolute_delta_bidPrice": 0.11999999999898137
+          },
+          "ETHUSDT": {
+            "absolute_delta_askPrice": 0.0,
+            "absolute_delta_bidPrice": 0.0
+          },
+          "VGXUSDT": {
+            "absolute_delta_askPrice": 0.0010000000000000009,
+            "absolute_delta_bidPrice": 0.0
+          },
+          "MATICUSDT": {
+            "absolute_delta_askPrice": 0.0,
+            "absolute_delta_bidPrice": 0.0
+          },
+          "BEAMUSDT": {
+            "absolute_delta_askPrice": 0.0006999999999999784,
+            "absolute_delta_bidPrice": 0.0002999999999999947
+          }
+        }
+
+        Prometheus metrics will be:
+
+        # HELP absolute_delta Absolute Delta Value of Price Spread
+        # TYPE absolute_delta gauge
+        absolute_delta{price_type="absolute_delta_askPrice",symbol="BTCUSDT"} 2.2700000000004366
+        absolute_delta{price_type="absolute_delta_bidPrice",symbol="BTCUSDT"} 0.819999999999709
+        absolute_delta{price_type="absolute_delta_askPrice",symbol="ETHUSDT"} 0.0
+        '''
         prom_gauge = Gauge('absolute_delta',
                                 'Absolute Delta Value of Price Spread', ['symbol','price_type'])
         #gauge_services = GaugeMetricFamily('system_services_state', 'System services status', labels=['service'])
