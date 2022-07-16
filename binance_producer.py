@@ -189,7 +189,7 @@ class BinanceProducer:
                 delta = {}
                 old_spread = self.get_price_spread(symbols,False)
                 print("\n Refresh in 10s \n")
-                time.sleep(3)
+                time.sleep(10)
                 new_spread = self.get_price_spread(symbols,False)
                 for symbol in symbols:
                     delta[symbol] = {}
