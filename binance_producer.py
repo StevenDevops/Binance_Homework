@@ -164,18 +164,6 @@ class BinanceProducer:
             "absolute_delta_askPrice": 0.5800000000017462,
             "absolute_delta_bidPrice": 0.11999999999898137
           },
-          "ETHUSDT": {
-            "absolute_delta_askPrice": 0.0,
-            "absolute_delta_bidPrice": 0.0
-          },
-          "VGXUSDT": {
-            "absolute_delta_askPrice": 0.0010000000000000009,
-            "absolute_delta_bidPrice": 0.0
-          },
-          "MATICUSDT": {
-            "absolute_delta_askPrice": 0.0,
-            "absolute_delta_bidPrice": 0.0
-          },
           "BEAMUSDT": {
             "absolute_delta_askPrice": 0.0006999999999999784,
             "absolute_delta_bidPrice": 0.0002999999999999947
@@ -190,22 +178,27 @@ class BinanceProducer:
         absolute_delta{price_type="absolute_delta_bidPrice",symbol="BTCUSDT"} 0.819999999999709
         absolute_delta{price_type="absolute_delta_askPrice",symbol="ETHUSDT"} 0.0
         '''
-        prom_gauge = Gauge('absolute_delta',
+        old_spread_gauge = Gauge('old_spread',
+                                'The Old Value of Price Spread', ['symbol','price_type'])
+        new_spread_gauge = Gauge('new_spread',
+                                'The New Value of Price Spread', ['symbol','price_type'])
+        delta_gauge      = Gauge('absolute_delta',
                                 'Absolute Delta Value of Price Spread', ['symbol','price_type'])
-        #gauge_services = GaugeMetricFamily('system_services_state', 'System services status', labels=['service'])
         while True:
             try:
                 delta = {}
                 old_spread = self.get_price_spread(symbols,False)
                 print("\n Refresh in 10s \n")
-                time.sleep(10)
+                time.sleep(3)
                 new_spread = self.get_price_spread(symbols,False)
                 for symbol in symbols:
                     delta[symbol] = {}
                     for key in old_spread[symbol]:
                         delta[symbol][key.replace("price_spread_","absolute_delta_")] = abs(old_spread[symbol][key] - new_spread[symbol][key])
+                        old_spread_gauge.labels(symbol,key).set(old_spread[symbol][key])
+                        new_spread_gauge.labels(symbol,key).set(new_spread[symbol][key])
                     for key in delta[symbol]:
-                         prom_gauge.labels(symbol,key).set(delta[symbol][key])
+                         delta_gauge.labels(symbol,key).set(delta[symbol][key])
 
                 print("\n The Absolute Delta Value of Price Spread for %s \n" %  symbols)
                 print(json.dumps(delta, indent=2))

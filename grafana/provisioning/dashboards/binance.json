@@ -21,8 +21,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1657974686187,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -36,8 +35,126 @@
       },
       "id": 7,
       "panels": [],
-      "title": "absolute_delta_askPrice",
+      "title": "askPrice",
       "type": "row"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "The Old Value of Ask Price Spread",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "old_spread{price_type=\"price_spread_askPrice\"} ",
+          "interval": "",
+          "legendFormat": "{{symbol}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "old_spread_askPrice",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "The New Value of Ask Price Spread",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "new_spread{price_type=\"price_spread_askPrice\"} ",
+          "interval": "",
+          "legendFormat": "{{symbol}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "new_spread_askPrice",
+      "type": "stat"
     },
     {
       "aliasColors": {},
@@ -55,10 +172,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 8,
+        "w": 24,
         "x": 0,
-        "y": 1
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 2,
@@ -146,12 +263,130 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 17
       },
       "id": 5,
       "panels": [],
-      "title": "absolute_delta_bidPrice",
+      "title": "bidPrice",
       "type": "row"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "The Old Value of Bid Price Spread",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "old_spread{price_type=\"price_spread_bidPrice\"} ",
+          "interval": "",
+          "legendFormat": "{{symbol}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "old_spread_bidPrice",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "The New Value of Bid Price Spread",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "new_spread{price_type=\"price_spread_bidPrice\"} ",
+          "interval": "",
+          "legendFormat": "{{symbol}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "new_spread_bidPrice",
+      "type": "stat"
     },
     {
       "aliasColors": {},
@@ -169,10 +404,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 7,
+        "w": 24,
         "x": 0,
-        "y": 11
+        "y": 26
       },
       "hiddenSeries": false,
       "id": 3,
@@ -264,7 +499,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "binance",
-  "uid": "binance",
-  "version": 1
+  "title": "binance-dashboard",
+  "uid": "binance_dashboard",
+  "version": 12
 }
