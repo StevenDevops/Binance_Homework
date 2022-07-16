@@ -1,0 +1,36 @@
+version: '3'
+services:
+  binance:
+    build:
+      context: .
+    command: binance_producer.py
+    ports:
+      - 8080:8080
+    networks:
+      - container_bridge
+  prometheus:
+    image: prom/prometheus:v2.17.2
+    networks:
+      - container_bridge
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana:8.1.5
+    environment:
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "true"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_AUTH_DISABLE_SIGNOUT_MENU: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+    networks:
+      - container_bridge
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+
+networks:
+  container_bridge:
+    name: container_bridge

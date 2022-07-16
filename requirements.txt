@@ -1,6 +1,6 @@
 Twisted>=21.2.0
 autobahn>=21.2.1
-pandas>=1.4.3
+pandas
 prometheus-client>=0.14.1
 pyOpenSSL>=19.0.0
 requests>=2.28.1

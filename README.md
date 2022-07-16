@@ -17,6 +17,7 @@
 6. Make the output of Q5 accessible by querying http://localhost:8080/metrics using the Prometheus Metrics format.
 
 ## Installation
+
 Make sure you had:
 1. [Python3](https://www.python.org/downloads/)
 2. [Pip3](https://pip.pypa.io/en/stable/installation/)
@@ -40,3 +41,29 @@ It's easy for me to use Binance APIs also we had a lot of libraries to support f
 Please visit [localhost:8080/metrics]() to see the metrics
 
 ![img.png](img.png)
+
+## Grafana dashboards (optional)
+
+In case we want to visualize Prometheus metrics from Q6. I made the docker-compose file for them.
+
+### Prerequisites:
+
+* Docker Engine >= 1.13
+* Docker Compose >= 1.11
+
+Build docker-compose
+```
+docker-compose build
+```
+Start docker-compose
+```
+docker-compose up
+```
+
+Clean up
+```
+docker-compose down --volumes --remove-orphans
+```
+Binance Dashboard
+
+![grafana.png](grafana.png)
