@@ -51,19 +51,20 @@ In case we want to visualize Prometheus metrics from Q6. I made the docker-compo
 * Docker Engine >= 1.13
 * Docker Compose >= 1.11
 
-Build docker-compose
+**Build docker-compose**
 ```
 docker-compose build
 ```
-Start docker-compose
+**Start docker-compose**
 ```
 docker-compose up
 ```
 
-Clean up
+**Clean up**
 ```
 docker-compose down --volumes --remove-orphans
 ```
-Binance Dashboard
+### Binance Dashboard
+Please visit [localhost:3000]() to see the Grafana dashboard
 
 ![grafana.png](grafana.png)
